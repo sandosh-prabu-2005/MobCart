@@ -43,13 +43,13 @@ header {
 }
 /* Style for the dustbin icon in the cart */
 .cart-trash-icon {
-    font-size: 24px;
-    color: #ff0000; /* Bright red for visibility */
+    font-size: 24px; /* Adjust size as needed */
+    color: #555; /* Set icon color */
     cursor: pointer;
-    display: inline-block; /* Ensure it takes space */
-    margin: 10px 0;
+    position: relative;
+    margin-left: 10px; /* Position the trash icon slightly to the right */
+    transition: color 0.3s ease; /* Smooth transition for icon color */
 }
-
 
 .cart-trash-icon:hover {
     color: #c0392b; /* Darker red on hover */
@@ -105,7 +105,8 @@ header img {
     object-fit: cover;
 }
 .cart-container {
-    position: fixed;
+    position: relative;
+    /* Existing styles */
     top: 80px;
     right: -100%;
     box-shadow: 0 0 5px orangered;
@@ -373,11 +374,12 @@ header img {
 
 .fa-trash {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 15px;
+    top: 10px; /* Adjust as needed for alignment */
+    right: 10px; /* Adjust to align to the right */
+    font-size: 18px; /* Reduce font size to fit inside the container */
     color: rgb(255, 157, 11);
     transition: 0.3s;
+    z-index: 10; /* Ensure it appears above other elements */
 }
 
 .fa-trash:hover {
@@ -519,15 +521,15 @@ i {
 .search #search-icon.small {
     transform: scale(0.8);
 }
-.container {
+.cacontainer {
     /* background-color: white; */
     /* width: 100%; */
-    top: 12%;
     left: 60%;
     height: auto;
     position: absolute;
     z-index: 99999;
 }
+
 .rowTableHeader {
     background-color: green;
     font-weight: bold;
@@ -701,4 +703,3 @@ i {
         width: 50%;
     }
 }
-
