@@ -7,25 +7,107 @@
     <link rel="stylesheet" href="./login.css">
     <title>MobCart-Login</title>
     <link rel="icon" type="image/png" href="./images/logo.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="whole-container">
         <div class="container">
-            <h1>Login</h1>
-            <input type="text" placeholder="Enter Your Name" id="name">
-            <input type="password" placeholder="Enter Your Password" id="password">
-            <div class="rember">
-                <input type="checkbox">
-                <h6>Remember Me</h6>
+            <!-- Logo Section -->
+            <div class="logo">
+                <img src="./images/logo.jpeg" alt="MobCart Logo">
             </div>
-            <a href="./dashboard.html"><button>Submit</button></a>
+
+            <!-- Heading -->
+            <h1><i class="fas fa-user-circle"></i> Login</h1>
+
+            <!-- Input with Icons -->
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter Your Name" id="name">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Enter Your Password" id="password">
+            </div>
+
+            <!-- Remember Me Section -->
+            <div class="rember">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                     Remember Me
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="submitBtn">
+                <i class="fas fa-sign-in-alt"></i> Submit
+            </button>
+
+            <!-- Error message -->
+            <div id="error-message" style="color: red; display: none;">Invalid credentials, please try again.</div>
+
+            <!-- Create Account Link -->
             <div class="createacc">
-                <h6>Don't have an account? <a href="./signup.html">Create One</a></h6>
+                <h6>
+                    <i class="fas fa-user-plus"></i> Don't have an account? 
+                    <a href="./signup.html">
+                        <i class="fas fa-arrow-right"></i> Create One
+                    </a>
+                </h6>
             </div>
         </div>
     </div>
 
+    <script>
+        // Predefined username and password (For demo purposes)
+        const validUsername = "user123";
+        const validPassword = "password123";
+
+        // Get the input elements, buttons, and the submit button
+        const nameInput = document.getElementById("name");
+        const passwordInput = document.getElementById("password");
+        const submitBtn = document.getElementById("submitBtn");
+        const rememberCheckbox = document.getElementById("remember");
+        const errorMessage = document.getElementById("error-message");
+
+        // Check if the "Remember Me" feature has saved credentials in localStorage
+        if (localStorage.getItem("rememberMe") === "true") {
+            nameInput.value = localStorage.getItem("username");
+            passwordInput.value = localStorage.getItem("password");
+            rememberCheckbox.checked = true;
+        }
+
+        // Handle login button click
+        submitBtn.addEventListener("click", function () {
+            const username = nameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Validate credentials
+            if (username === validUsername && password === validPassword) {
+                // Clear any error message
+                errorMessage.style.display = "none";
+
+                // Save credentials if "Remember Me" is checked
+                if (rememberCheckbox.checked) {
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    localStorage.setItem("rememberMe", "true");
+                } else {
+                    // Clear stored credentials if "Remember Me" is not checked
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("password");
+                    localStorage.removeItem("rememberMe");
+                }
+
+                // Redirect to dashboard (replace with your actual dashboard URL)
+                window.location.href = "./dashboard.html";
+            } else {
+                // Show error message
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
 </body>
 
 </html>
