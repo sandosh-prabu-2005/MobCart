@@ -41,6 +41,25 @@ header {
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
 }
+/* Style for the dustbin icon in the cart */
+.cart-trash-icon {
+    font-size: 24px;
+    color: #ff0000; /* Bright red for visibility */
+    cursor: pointer;
+    display: inline-block; /* Ensure it takes space */
+    margin: 10px 0;
+}
+
+
+.cart-trash-icon:hover {
+    color: #c0392b; /* Darker red on hover */
+}
+
+/* Ensure the cartTable is relative so the trash icon can be positioned in relation to it */
+#cartTable {
+    position: relative;
+    padding-top: 30px; /* Add space to avoid overlapping with the trash icon */
+}
 
 .remove-btn:hover {
     background-color: #d9363e; /* Darker red on hover */
@@ -67,6 +86,9 @@ header h1 {
 }
 header strong {
     color: rgb(0, 139, 127);
+}
+#cartTable.visible {
+    display: block;
 }
 
 header li {
@@ -556,7 +578,12 @@ i {
 .cartIcon{
     cursor: pointer;
 }
-
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
 /* Bounce Animation */
 @keyframes bounce {
     0%, 100% {
@@ -579,3 +606,99 @@ i {
         transform: skew(30deg) translateX(350px);
     }
 }
+/* Add a Hamburger Menu for the Cart */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Base Styles (Desktop-First Approach) */
+/* Already provided in your CSS */
+
+/* Small Devices (Smartphones, max-width: 576px) */
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .product-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .cart-container {
+        width: 100%;
+        right: -100%; /* Hidden off-screen */
+        transition: right 0.3s ease;
+    }
+
+    .cart-container.openCart {
+        right: 0; /* Slide in */
+    }
+}
+
+/* Medium Devices (Tablets, max-width: 768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .product-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .cart-container {
+        width: 90%;
+        right: -100%; /* Hidden by default */
+        transition: right 0.3s ease;
+    }
+
+    .cart-container.openCart {
+        right: 0; /* Slide in */
+    }
+
+    .hamburger-menu {
+        display: block; /* Show hamburger menu */
+    }
+}
+
+/* Large Devices (Desktops, max-width: 1024px) */
+@media (max-width: 1024px) {
+    .product-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    header {
+        padding: 10px 20px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .cart-container {
+        width: 50%;
+    }
+}
+
