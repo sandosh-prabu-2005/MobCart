@@ -70,15 +70,16 @@
         const nameInput = document.getElementById("name");
         const passwordInput = document.getElementById("password");
         const errorMessage = document.getElementById("error-message");
-
-        submitBtn.addEventListener("click", function () {
+    
+        // Function to handle login
+        const handleLogin = () => {
             const username = nameInput.value.trim();
             const password = passwordInput.value.trim();
-
+    
             const users = JSON.parse(localStorage.getItem("users")) || [];
-
+    
             const user = users.find(u => u.name === username && u.password === password);
-
+    
             if (user) {
                 errorMessage.style.display = "none";
                 alert(`Welcome back, ${user.name}!`);
@@ -86,8 +87,19 @@
             } else {
                 errorMessage.style.display = "block";
             }
+        };
+    
+        // Trigger login on button click
+        submitBtn.addEventListener("click", handleLogin);
+    
+        // Trigger login on pressing Enter
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                handleLogin();
+            }
         });
     </script>
+    
 </body>
 
 </html>
