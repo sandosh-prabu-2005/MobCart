@@ -1,0 +1,219 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f5f7fa;
+    animation: backgroundColorChange 12s infinite alternate;
+}
+
+/* Background Animation */
+@keyframes backgroundColorChange {
+    0% { background-color: #f5f7fa; }
+    50% { background-color: #e0f0ff; }
+    100% { background-color: #f5fff0; }
+}
+
+/* Main Container */
+.whole-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Logo */
+.logo img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+/* Form Heading */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #f9f9f9;
+}
+
+/* Input Group */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    background-color: #eef7ff;
+}
+
+/* Terms and Conditions */
+.remember {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.remember a {
+    color: #00aaff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.remember a:hover {
+    color: #0056b3;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Error and Success Messages */
+#error-message, #success-message {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#error-message {
+    color: #ff4d4d;
+}
+
+#success-message {
+    color: #4caf50;
+}
+
+/* Already Have an Account Section */
+.already-account {
+    margin-top: 15px;
+}
+
+.already-account h6 {
+    font-size: 14px;
+    color: #ccc;
+    text-align: center;
+}
+
+.already-account a {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.already-account a:hover {
+    color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .input-group input {
+        padding-left: 35px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    .logo img {
+        width: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

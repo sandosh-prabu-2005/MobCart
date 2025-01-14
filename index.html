@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="./login.css">
     <title>MobCart-Login</title>
     <link rel="icon" type="image/png" href="./images/logo.jpeg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -39,7 +41,7 @@
             <div class="rember">
                 <input type="checkbox" id="remember">
                 <label for="remember">
-                     Remember Me
+                    Remember Me
                 </label>
             </div>
 
@@ -54,7 +56,7 @@
             <!-- Create Account Link -->
             <div class="createacc">
                 <h6>
-                    <i class="fas fa-user-plus"></i> Don't have an account? 
+                    <i class="fas fa-user-plus"></i> Don't have an account?
                     <a href="./signup.html">
                         <i class="fas fa-arrow-right"></i> Create One
                     </a>
@@ -64,50 +66,24 @@
     </div>
 
     <script>
-        // Predefined username and password (For demo purposes)
-        const validUsername = "user123";
-        const validPassword = "password123";
-
-        // Get the input elements, buttons, and the submit button
+        const submitBtn = document.getElementById("submitBtn");
         const nameInput = document.getElementById("name");
         const passwordInput = document.getElementById("password");
-        const submitBtn = document.getElementById("submitBtn");
-        const rememberCheckbox = document.getElementById("remember");
         const errorMessage = document.getElementById("error-message");
 
-        // Check if the "Remember Me" feature has saved credentials in localStorage
-        if (localStorage.getItem("rememberMe") === "true") {
-            nameInput.value = localStorage.getItem("username");
-            passwordInput.value = localStorage.getItem("password");
-            rememberCheckbox.checked = true;
-        }
-
-        // Handle login button click
         submitBtn.addEventListener("click", function () {
             const username = nameInput.value.trim();
             const password = passwordInput.value.trim();
 
-            // Validate credentials
-            if (username === validUsername && password === validPassword) {
-                // Clear any error message
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            const user = users.find(u => u.name === username && u.password === password);
+
+            if (user) {
                 errorMessage.style.display = "none";
-
-                // Save credentials if "Remember Me" is checked
-                if (rememberCheckbox.checked) {
-                    localStorage.setItem("username", username);
-                    localStorage.setItem("password", password);
-                    localStorage.setItem("rememberMe", "true");
-                } else {
-                    // Clear stored credentials if "Remember Me" is not checked
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("password");
-                    localStorage.removeItem("rememberMe");
-                }
-
-                // Redirect to dashboard (replace with your actual dashboard URL)
+                alert(`Welcome back, ${user.name}!`);
                 window.location.href = "./dashboard.html";
             } else {
-                // Show error message
                 errorMessage.style.display = "block";
             }
         });

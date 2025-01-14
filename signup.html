@@ -1,28 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobCart-SignUp</title>
-    <link rel="icon" type="image/png" href="./images/logo.jpeg">
-</head>
-<body>
-    <div class="whole-container">
-        <div class="container">
-            <h1>Login</h1>
-            <input type="email" name="Enter Your Email" id="">
-            <input type="password" name="Enter Your Password" id="">
-            <input type="password" placeholder="Re-Enter Your Password">
-            <div class="rember">
-                <input type="checkbox">
-                <h6>Remember Me</h6>
-            </div>
-            <a href="./dashboard.html"><button>Submit</button></a>
-            <div class="createacc">
-                <h6>Already have an account? <a href="./index.html">Sign In</a></h6>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./signup.css">
+        <title>MobCart - Sign Up</title>
+        <link rel="icon" type="image/png" href="./images/logo.jpeg">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <div class="whole-container">
+            <video autoplay loop muted playsinline id="background-video">
+                <source src="./images/bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="container">
+                <!-- Logo Section -->
+                <div class="logo">
+                    <img src="./images/logo.jpeg" alt="MobCart Logo">
+                </div>
+
+                <!-- Heading -->
+                <h1><i class="fas fa-user-circle"></i> Sign Up</h1>
+
+                <!-- Input with Icons -->
+                <form id="signupForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Enter Your Name" id="name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Enter Your Email" id="email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" placeholder="Enter Your Phone Number" id="phone" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Enter Your Password" id="password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Confirm Your Password" id="confirmPassword" required>
+                    </div>
+
+                    <!-- Terms Section -->
+                    <div class="remember">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms"> I agree to the <a href="#">Terms and Conditions</a></label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+
+                    <!-- Error and Success Messages -->
+                    <div id="error-message" style="color: red; display: none;">Passwords do not match. Please try again.</div>
+                    <div id="success-message" style="color: green; display: none;">Account created successfully!</div>
+                </form>
+
+                <!-- Already Have an Account Link -->
+                <div class="already-account">
+                    <h6>
+                        <i class="fas fa-arrow-left"></i> Already have an account? 
+                        <a href="./index.html">Log In</a>
+                    </h6>
+                </div>
             </div>
         </div>
-    </div>
 
-</body>
-</html>
+        <script>
+            const signupForm = document.getElementById('signupForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const genderInput = document.getElementById('gender');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const gender = genderInput.value;
+                const password = passwordInput.value.trim();
+                const confirmPassword = confirmPasswordInput.value.trim();
+
+                if (password !== confirmPassword) {
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    return;
+                }
+
+                // Store user data in localStorage
+                const user = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    gender: gender,
+                    password: password
+                };
+
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users.push(user);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Clear the form
+                signupForm.reset();
+            });
+        </script>
+    </body>
+
+    </html>
