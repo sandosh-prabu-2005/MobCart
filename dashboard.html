@@ -19,9 +19,23 @@
             <img src="images/logo.jpeg" alt="Logo" class="img-logo">
             <h1 class="logo">Mobile <span class="time">Cart</span><strong>!</strong></h1>
         </div>
+        <div class="filter">
+            <label for="brand-filter" class="filter-label">Filter by: </label>
+            <select id="brand-filter" class="brand-select">
+                <option value="all">All</option>
+                <option value="Realme">Realme</option>
+                <option value="Redmi">Redmi</option>
+                <option value="Nothing">Nothing</option>
+                <option value="iPhone">iPhone</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Asus">Asus</option>
+                <option value="Motorola">Motorola</option>
+            </select>
+        </div>
+
         <div class="search">
             <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-            <input type="text" id="search-input" class="hidden" placeholder="Search for Mobile Brand">
+            <input type="text" id="search-input" class="hidden" placeholder="Search for Mobile Name">
         </div>
         <div class="cart-icon-container">
             <li><span class="cartNotify">0</span><img class="cartIcon" src="images/shopping-bag.png" alt="Cart"></li>
@@ -36,12 +50,12 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!-- Product Display Section -->
     <div class="product-container">
-        
+
         <div class="products">
             <img class="productImage" src="./images/gsmarena_001.jpg" alt="">
             <div class="prductinfo">
@@ -243,9 +257,6 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- JavaScript -->
     <script src="addtocart.js"></script>
 </body>

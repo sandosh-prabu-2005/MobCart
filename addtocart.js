@@ -1,30 +1,48 @@
-document.getElementById('search-icon')?.addEventListener('click', function () {
-    const searchInput = document.getElementById('search-input');
-    const searchIcon = document.getElementById('search-icon');
-    if (searchInput && searchIcon) {
-        searchInput.classList.toggle('show');
-        searchIcon.classList.toggle('small');
-    }
-});
+let cart = [];
+
+// Search functionality
+const searchInput = document.getElementById('search-input');
+if (searchInput) {
+    searchInput.addEventListener('keyup', function () {
+        const searchQuery = this.value.toLowerCase();
+        const productContainers = document.querySelectorAll('.products');
+
+        productContainers.forEach(product => {
+            const productName = product.querySelector('.prname')?.textContent.toLowerCase();
+            if (productName && productName.includes(searchQuery)) {
+                product.style.display = '';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Cart Toggle
 function toggleCart() {
     const cart = document.getElementById("cart");
     cart.classList.toggle("openCart");
 }
 
-document.getElementById('search-input')?.addEventListener('keyup', function () {
-    const searchQuery = this.value.toLowerCase();
-    const productContainers = document.querySelectorAll('.products');
+// Brand Filter
+const brandFilter = document.getElementById('brand-filter');
+if (brandFilter) {
+    brandFilter.addEventListener('change', function () {
+        const selectedBrand = this.value.toLowerCase();
+        const productContainers = document.querySelectorAll('.products');
 
-    productContainers.forEach(product => {
-        const productName = product.querySelector('.prname')?.textContent.toLowerCase();
-        if (productName && productName.includes(searchQuery)) {
-            product.style.display = '';
-        } else {
-            product.style.display = 'none';
-        }
+        productContainers.forEach(product => {
+            const productName = product.querySelector('.prname')?.textContent.toLowerCase();
+            if (selectedBrand === 'all' || productName.includes(selectedBrand)) {
+                product.style.display = '';
+            } else {
+                product.style.display = 'none';
+            }
+        });
     });
-});
+}
 
+// Cart Icon Toggle
 document.addEventListener('DOMContentLoaded', function () {
     const cartIcon = document.querySelector('.cartIcon');
     const cartTable = document.getElementById('cartTable');
@@ -84,8 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-let cart = [];
-
+// Add to Cart
 function addToCart(productName, productPrice, productImage) {
     const existingItem = cart.find(item => item.name === productName);
     if (existingItem) {
@@ -98,6 +115,7 @@ function addToCart(productName, productPrice, productImage) {
     updateCartNotification();
 }
 
+// Render Cart
 function renderCart() {
     const cartTable = document.getElementById('cartTable');
     if (!cartTable) return;
@@ -154,6 +172,12 @@ function renderCart() {
     `;
     cartTable.appendChild(footer);
 
+    attachEventListeners();
+}
+
+// Attach Event Listeners
+function attachEventListeners() {
+    // Increase quantity
     document.querySelectorAll('.quantity-btn.increase').forEach(button => {
         button.addEventListener('click', () => {
             const index = parseInt(button.getAttribute('data-index'), 10);
@@ -163,6 +187,7 @@ function renderCart() {
         });
     });
 
+    // Decrease quantity
     document.querySelectorAll('.quantity-btn.decrease').forEach(button => {
         button.addEventListener('click', () => {
             const index = parseInt(button.getAttribute('data-index'), 10);
@@ -176,6 +201,7 @@ function renderCart() {
         });
     });
 
+    // Remove item
     document.querySelectorAll('.remove-btn').forEach(button => {
         button.addEventListener('click', () => {
             const index = parseInt(button.getAttribute('data-index'), 10);
@@ -185,14 +211,11 @@ function renderCart() {
         });
     });
 
-    document.querySelector('.place-order-btn').addEventListener('click', () => {
-        alert(`Your order has been placed successfully! Total amount: Rs. ${totalAmount}`);
-        cart = [];
-        renderCart();
-        updateCartNotification();
-    });
+    // Place order
+    document.querySelector('.place-order-btn')?.addEventListener('click', generateBill);
 }
 
+// Update Cart Notification
 function updateCartNotification() {
     const cartNotify = document.querySelector('.cartNotify');
     if (cartNotify) {
@@ -200,6 +223,8 @@ function updateCartNotification() {
         cartNotify.textContent = totalItems; 
     }
 }
+
+// Add Product Button to Cart
 document.querySelectorAll('.pr-btn').forEach((button) => {
     button.addEventListener('click', () => {
         const product = button.closest('.products');
@@ -229,3 +254,141 @@ document.querySelectorAll('.pr-btn').forEach((button) => {
         addToCart(productName, productPrice, productImage);
     });
 });
+
+// Generate Bill
+function generateBill() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    // Open a new window
+    const billWindow = window.open('', '_blank', 'width=800,height=600');
+    if (!billWindow) {
+        alert('Unable to open the bill. Please disable pop-up blockers and try again.');
+        return;
+    }
+
+    const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    // Generate Bill HTML
+    const billHTML = `
+    <html>
+    <head>
+        <title>Order Estimate</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 20px;
+                background-color: #f7f7f7;
+            }
+            h1 {
+                text-align: center;
+                color: #4CAF50;
+                font-size: 36px;
+                margin-bottom: 30px;
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .header img {
+                max-width: 200px;
+                height: auto;
+                margin-bottom: 20px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                background-color: #ffffff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px 15px;
+                text-align: left;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+                font-size: 16px;
+            }
+            td {
+                font-size: 14px;
+                color: #555;
+            }
+            td img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+            .total {
+                text-align: right;
+                font-weight: bold;
+                font-size: 22px;
+                margin-top: 30px;
+                color: #4CAF50;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 40px;
+                font-size: 14px;
+                color: #888;
+            }
+            .footer a {
+                color: #4CAF50;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img src="images/logo.jpeg" alt="Company Logo"> <!-- Replace with actual logo -->
+            <h1>Order Estimate</h1>
+        </div>
+
+        <table>
+            <tr>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            ${cart
+                .map(
+                    (item) => `
+                <tr>
+                    <td><img src="${item.image}" alt="${item.name}"></td>
+                    <td>${item.name}</td>
+                    <td>Rs. ${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>Rs. ${item.price * item.quantity}</td>
+                </tr>`
+                )
+                .join('')}
+        </table>
+
+        <div class="total">Grand Total: Rs. ${totalAmount}</div>
+
+        <div class="footer">
+            <p>Thank you for shopping with us!</p>
+            <p>For any inquiries, contact us at <a href="mailto:ravimurugan41sa@gmail.com">ravimurugan41sa@gmail.com</a></p>
+        </div>
+    </body>
+    </html>
+`;
+
+    billWindow.document.open();
+    billWindow.document.write(billHTML);
+    billWindow.document.close();
+
+    cart = [];
+    renderCart();
+    updateCartNotification();
+}
