@@ -1,0 +1,29 @@
+{
+  "name": "mobcart",
+  "version": "1.0.0",
+  "main": "addtocart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandosh-prabu-2005/MobCart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandosh-prabu-2005/MobCart/issues"
+  },
+  "homepage": "https://github.com/sandosh-prabu-2005/MobCart#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
+  }
+}

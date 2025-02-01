@@ -1,118 +1,153 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./signup.css">
-        <title>MobCart - Sign Up</title>
-        <link rel="icon" type="image/png" href="./images/logo.jpeg">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./signup.css">
+    <title>MobCart - Sign Up</title>
+    <link rel="icon" type="image/png" href="./images/logo.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
-    <body>
-        <div class="whole-container">
-            <video autoplay loop muted playsinline id="background-video">
-                <source src="./images/bg.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="container">
-                <!-- Logo Section -->
-                <div class="logo">
-                    <img src="./images/logo.jpeg" alt="MobCart Logo">
+<body>
+    <div class="whole-container">
+        <video autoplay loop muted playsinline id="background-video">
+            <source src="./images/bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <!-- Logo Section -->
+            <div class="logo">
+                <img src="./images/logo.jpeg" alt="MobCart Logo">
+            </div>
+
+            <!-- Heading -->
+            <h1><i class="fas fa-user-circle"></i> Sign Up</h1>
+
+            <!-- Input with Icons -->
+            <form id="signupForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Enter Your Name" id="name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Enter Your Email" id="email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" placeholder="Enter Your Phone Number" id="phone" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Enter Your Password" id="password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirm Your Password" id="confirmPassword" required>
                 </div>
 
-                <!-- Heading -->
-                <h1><i class="fas fa-user-circle"></i> Sign Up</h1>
-
-                <!-- Input with Icons -->
-                <form id="signupForm">
-                    <div class="input-group">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Enter Your Name" id="name" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Enter Your Email" id="email" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-phone"></i>
-                        <input type="tel" placeholder="Enter Your Phone Number" id="phone" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Enter Your Password" id="password" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Confirm Your Password" id="confirmPassword" required>
-                    </div>
-
-                    <!-- Terms Section -->
-                    <div class="remember">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms"> I agree to the <a href="#">Terms and Conditions</a></label>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" id="submitBtn">
-                        <i class="fas fa-user-plus"></i> Sign Up
-                    </button>
-
-                    <!-- Error and Success Messages -->
-                    <div id="error-message" style="color: red; display: none;">Passwords do not match. Please try again.</div>
-                    <div id="success-message" style="color: green; display: none;">Account created successfully!</div>
-                </form>
-
-                <!-- Already Have an Account Link -->
-                <div class="already-account">
-                    <h6>
-                        <i class="fas fa-arrow-left"></i> Already have an account? 
-                        <a href="./index.html">Log In</a>
-                    </h6>
+                <!-- Terms Section -->
+                <div class="remember">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms"> I agree to the <a href="#">Terms and Conditions</a></label>
                 </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+
+                <!-- Error and Success Messages -->
+                <div id="error-message" style="color: red; display: none;">Passwords do not match. Please try again.
+                </div>
+                <div id="success-message" style="color: green; display: none;">Account created successfully!</div>
+            </form>
+
+            <!-- Already Have an Account Link -->
+            <div class="already-account">
+                <h6>
+                    <i class="fas fa-arrow-left"></i> Already have an account?
+                    <a href="./index.html">Log In</a>
+                </h6>
             </div>
         </div>
+    </div>
 
-        <script>
-           const signupForm = document.getElementById('signupForm');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
-const passwordInput = document.getElementById('password');
-const confirmPasswordInput = document.getElementById('confirmPassword');
-const errorMessage = document.getElementById('error-message');
-const successMessage = document.getElementById('success-message');
+    <script>
+        const signupForm = document.getElementById('signupForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
 
-signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+        // Function to highlight invalid fields
+        const highlightError = (input, message) => {
+            input.style.border = "2px solid red";
+            errorMessage.textContent = message;
+            errorMessage.style.display = "block";
+        };
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const password = passwordInput.value.trim();
-    const confirmPassword = confirmPasswordInput.value.trim();
+        // Function to clear highlights
+        const clearErrors = () => {
+            [nameInput, emailInput, phoneInput, passwordInput, confirmPasswordInput].forEach(input => {
+                input.style.border = "1px solid #ccc";
+            });
+            errorMessage.style.display = "none";
+        };
 
-    // Check if passwords match
-    if (password !== confirmPassword) {
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-        return;
-    }
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearErrors(); // Reset error states
 
-    // Create a user object and store it in localStorage
-    const user = { name, email, phone, password };
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(user);
-    localStorage.setItem('users', JSON.stringify(users));
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const password = passwordInput.value.trim();
+            const confirmPassword = confirmPasswordInput.value.trim();
 
-    // Display success message and reset form
-    successMessage.style.display = 'block';
-    errorMessage.style.display = 'none';
-    signupForm.reset();
-});
+            // Simple client-side validation
+            if (!name) return highlightError(nameInput, "Name is required.");
+            if (!email) return highlightError(emailInput, "Email is required.");
+            if (!phone) return highlightError(phoneInput, "Phone number is required.");
+            if (!password) return highlightError(passwordInput, "Password is required.");
+            if (password.length < 6) return highlightError(passwordInput, "Password must be at least 6 characters.");
+            if (password !== confirmPassword) return highlightError(confirmPasswordInput, "Passwords do not match.");
 
-        </script>
-    </body>
+            try {
+                console.log("Sending request to server...");
 
-    </html>
+                const response = await fetch('http://localhost:3000/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password }),
+                });
+
+
+                const data = await response.json();
+                console.log("Response received:", data);
+
+                if (response.ok) {
+                    successMessage.textContent = "Account created successfully!";
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    signupForm.reset();
+                } else {
+                    highlightError(emailInput, data.message || "Error creating account");
+                }
+            } catch (err) {
+                console.error("Network error:", err);
+                errorMessage.textContent = "Network error. Please try again.";
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+
+</html>

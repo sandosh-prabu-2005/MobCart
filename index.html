@@ -66,52 +66,60 @@
     </div>
     <script>
         const submitBtn = document.getElementById("submitBtn");
-const nameInput = document.getElementById("name");
-const passwordInput = document.getElementById("password");
-const errorMessage = document.getElementById("error-message");
+        const nameInput = document.getElementById("name");
+        const passwordInput = document.getElementById("password");
+        const errorMessage = document.getElementById("error-message");
 
-// Function to handle login
-const handleLogin = () => {
-    const username = nameInput.value.trim();
-    const password = passwordInput.value.trim();
+        // Function to handle login
+        const handleLogin = async () => {
+            const username = nameInput.value.trim();
+            const password = passwordInput.value.trim();
 
-    // Check if both username and password are provided
-    if (!username || !password) {
-        errorMessage.textContent = "Please enter both username and password.";
-        errorMessage.style.display = "block";
-        return;
-    }
+            if (!username || !password) {
+                errorMessage.textContent = "Please enter both username and password.";
+                errorMessage.style.display = "block";
+                return;
+            }
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(u => u.name === username && u.password === password);
+            try {
+                // Send the login request to the backend
+                const response = await fetch("http://localhost:3000/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: username, password }),
+                });
 
-    if (user) {
-        errorMessage.style.display = "none";
-        alert(`Welcome back, ${user.name}!`);
-        window.location.href = "./dashboard.html"; // Redirect to dashboard
-    } else {
-        errorMessage.textContent = "Invalid username or password.";
-        errorMessage.style.display = "block";
-    }
-};
+                const data = await response.json();
 
-// Check if elements exist before adding event listeners
-if (submitBtn && nameInput && passwordInput && errorMessage) {
-    // Trigger login on button click
-    submitBtn.addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent form submission if it's inside a form
-        handleLogin();
-    });
+                if (response.ok) {
+                    // If login is successful
+                    errorMessage.style.display = "none";
+                    alert(`Welcome back, ${data.name}!`);
+                    window.location.href = "./dashboard.html"; // Redirect to dashboard after login
+                } else {
+                    // If login fails
+                    errorMessage.textContent = data.message || "Invalid username or password.";
+                    errorMessage.style.display = "block";
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                errorMessage.textContent = "Network error. Please try again.";
+                errorMessage.style.display = "block";
+            }
+        };
 
-    // Trigger login on pressing Enter
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
+        // Event listeners
+        submitBtn.addEventListener("click", (event) => {
+            event.preventDefault();
             handleLogin();
-        }
-    });
-} else {
-    console.error("One or more required elements are missing from the DOM.");
-}
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                handleLogin();
+            }
+        });
     </script>
 </body>
+
 </html>
